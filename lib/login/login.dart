@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:oms/dashboard/home.dart';
+import 'package:oms/login/register.dart';
+import 'package:oms/login/resetpass.dart';
 
 class myLogin extends StatefulWidget {
   const myLogin({Key? key}) : super(key: key);
@@ -215,7 +217,12 @@ class _myLoginState extends State<myLogin> {
                         children: [
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'register');
+                              // Navigator.pushNamed(context, 'register');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const myRegister()));
                             },
                             child: Text(
                               'Register',
@@ -226,7 +233,12 @@ class _myLoginState extends State<myLogin> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'forgot');
+                              //Navigator.pushNamed(context, 'forgot');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const resetPassword()));
                             },
                             child: Text(
                               'Forgot password?',
