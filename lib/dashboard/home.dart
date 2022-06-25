@@ -24,36 +24,41 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          title: Text('Home'),
+          title: const Text('Home'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('Your Dashbord is Here'),
         ),
         bottomNavigationBar: BottomAppBar(
-          child: Container(
-            height: 50.0,
-            child: Row(children: <Widget>[
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
               IconButton(
-                icon: Icon(Icons.home),
-                onPressed: () {
-                  print("Arun");
-                },
+                icon: const Icon(Icons.home,
+                    color: Color.fromARGB(247, 235, 150, 65)),
+                padding: const EdgeInsets.only(left: 30.0),
+                iconSize: 40,
+                onPressed: () {},
               ),
               IconButton(
-                icon: Icon(Icons.search_outlined),
-                onPressed: () {
-                  print("Arun");
-                },
+                icon: const Icon(Icons.search_outlined),
+                padding: const EdgeInsets.only(left: 120.0),
+                iconSize: 40,
+                onPressed: () {},
               ),
               IconButton(
-                icon: Icon(Icons.today_outlined),
+                icon: const Icon(Icons.today_outlined),
+                padding: const EdgeInsets.only(left: 130.0),
+                iconSize: 40,
                 onPressed: () {
                   print("Arun");
-                  Navigator.push(context,
-                      CupertinoPageRoute(builder: ((context) => todo())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TodoListScreen()));
                 },
               )
-            ]),
+            ],
           ),
         ));
   }

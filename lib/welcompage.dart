@@ -76,7 +76,6 @@ class WelcomPage extends StatelessWidget {
 
                     child: RaisedButton(
                       onPressed: () => {
-                        print("amitha"),
                         //do something
                         Navigator.push(
                             context,
