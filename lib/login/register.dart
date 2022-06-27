@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:oms/login/login.dart';
+import 'package:oms/login/resetpass.dart';
 
 class myRegister extends StatefulWidget {
   const myRegister({Key? key}) : super(key: key);
@@ -79,30 +80,23 @@ class _myRegisterState extends State<myRegister> {
           ),
         ),
         child: Scaffold(
-          appBar: AppBar(
-              elevation: null,
-              backgroundColor: Color.fromARGB(0, 225, 89, 89),
-              leading: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'login');
-                },
-                child: Icon(
-                  Icons.arrow_back_ios_rounded,
-                  color: Colors.white,
-                ),
-              )),
           backgroundColor: Colors.transparent,
           body: Stack(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'REGISTER',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 38.0,
+                  Container(
+                    padding: EdgeInsets.only(
+                      top: 60.0,
+                    ),
+                    child: Text(
+                      'Register',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40.0,
+                      ),
                     ),
                   ),
                 ],
@@ -110,7 +104,7 @@ class _myRegisterState extends State<myRegister> {
               SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.20,
+                    top: MediaQuery.of(context).size.height * 0.3,
                     left: 35,
                     right: 35,
                   ),
@@ -144,20 +138,6 @@ class _myRegisterState extends State<myRegister> {
                           ),
                         ),
                       ),
-                      //SizedBox(height: 30.0),
-                      // TextField(
-                      //   decoration: InputDecoration(
-                      //     fillColor: Colors.grey.shade100,
-                      //     filled: true,
-                      //     labelText: 'Phone',
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10.0),
-                      //       borderSide: const BorderSide(
-                      //         color: Colors.white,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(height: 30.0),
                       TextField(
                         controller: passwordController,
@@ -182,13 +162,11 @@ class _myRegisterState extends State<myRegister> {
                               style: ElevatedButton.styleFrom(
                                 maximumSize: const Size(170.0, 90.0),
                                 minimumSize: const Size(170.0, 60.0),
-                                primary: Color.fromARGB(46, 244, 112, 110),
+                                primary: Color.fromARGB(247, 235, 150, 65),
                                 shape: const StadiumBorder(),
                               ),
                               onPressed: () {
                                 createAccount();
-
-                                // Navigator.pushNamed(context, 'login');
                               },
                               child: Row(
                                 mainAxisAlignment:
@@ -210,25 +188,31 @@ class _myRegisterState extends State<myRegister> {
                         children: [
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'login');
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => myLogin()));
                             },
                             child: Text(
                               'Login',
                               style: TextStyle(
-                                  height: -1,
-                                  fontSize: 18,
+                                  height: 1,
+                                  fontSize: 20,
                                   color: Color.fromARGB(255, 3, 192, 244)),
                             ),
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'forgot');
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => resetPassword()));
                             },
                             child: Text(
                               'Forgot password?',
                               style: TextStyle(
-                                  height: -1,
-                                  fontSize: 18,
+                                  height: 1,
+                                  fontSize: 20,
                                   color: Color.fromARGB(255, 3, 192, 244)),
                             ),
                           ),
