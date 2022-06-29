@@ -42,7 +42,7 @@ class WelcomPage extends StatelessWidget {
                       top: 80.0,
                     ),
                     child: Text(
-                      'Welcome to the best ToDo baby !!',
+                      'Welcome to the best ToDo App !!',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.subtitle1?.copyWith(
                             letterSpacing: 3,
