@@ -10,6 +10,7 @@ class MyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Home',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
@@ -51,7 +52,7 @@ class MyHomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 130.0),
                 iconSize: 40,
                 onPressed: () {
-                  print("Arun");
+                  print("Todo List Page");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
