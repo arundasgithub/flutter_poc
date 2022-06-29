@@ -309,14 +309,14 @@ class _TodoListScreenState extends State<TodoListScreen> {
             ),
             IconButton(
               icon: const Icon(Icons.search_outlined),
-              padding: const EdgeInsets.only(left: 120.0),
+              padding: const EdgeInsets.only(left: 100.0),
               iconSize: 40,
               onPressed: () {},
             ),
             IconButton(
               icon: const Icon(Icons.today_outlined,
                   color: Color.fromARGB(247, 235, 150, 65)),
-              padding: const EdgeInsets.only(left: 130.0),
+              padding: const EdgeInsets.only(left: 110.0),
               iconSize: 40,
               onPressed: () {
                 print("Arun");

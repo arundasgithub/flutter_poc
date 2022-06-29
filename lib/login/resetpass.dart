@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:oms/login/login.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:oms/login/register.dart';
 
 class resetPassword extends StatefulWidget {
   const resetPassword({Key? key}) : super(key: key);
@@ -113,7 +116,7 @@ class _resetPasswordState extends State<resetPassword> {
                               style: ElevatedButton.styleFrom(
                                 maximumSize: Size(170.0, 90.0),
                                 minimumSize: Size(170.0, 60.0),
-                                primary: Color.fromARGB(46, 244, 112, 110),
+                                primary: Color.fromARGB(247, 235, 150, 65),
                                 shape: StadiumBorder(),
                               ),
                               onPressed: () {
@@ -139,23 +142,29 @@ class _resetPasswordState extends State<resetPassword> {
                         children: [
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'register');
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => myRegister()));
                             },
                             child: Text(
                               'Register',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   color: Color.fromARGB(255, 3, 192, 244)),
                             ),
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'login');
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => myLogin()));
                             },
                             child: Text(
                               'Login',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   color: Color.fromARGB(255, 3, 192, 244)),
                             ),
                           ),

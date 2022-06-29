@@ -94,21 +94,7 @@ class _myLoginState extends State<myLogin> {
               });
           print('No user found for that email.');
         }
-        // else if (e.code == 'wrong-password') {
-        //   print('Wrong password provided for that user.');
-        // }
       }
-      // UserCredential userCredential = await FirebaseAuth.instance
-      //     .signInWithEmailAndPassword(email: email, password: password);
-      // // const user = userCredential.user;
-      // // if (UserCredential.user != null) {
-      // //log("Login sucess");
-      // //}
-
-      // log("Login sucess");
-      // Navigator.popUntil(context, (route) => route.isFirst);
-      // Navigator.pushReplacement(
-      //     context, CupertinoPageRoute(builder: ((context) => myHome())));
     }
   }
 
@@ -136,7 +122,7 @@ class _myLoginState extends State<myLogin> {
                       top: 60.0,
                     ),
                     child: Text(
-                      'My App',
+                      'My ToDo App',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -149,7 +135,7 @@ class _myLoginState extends State<myLogin> {
               SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.5,
+                    top: MediaQuery.of(context).size.height * 0.4,
                     left: 35,
                     right: 35,
                   ),
