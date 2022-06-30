@@ -73,10 +73,10 @@ class _resetPasswordState extends State<resetPassword> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                      top: 60.0,
+                      top: 70.0,
                     ),
                     child: Text(
-                      'RESET \n NOW',
+                      'Reset Password',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,

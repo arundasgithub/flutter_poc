@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:oms/login/login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:oms/login/resetpass.dart';
 
 class myRegister extends StatefulWidget {
@@ -18,53 +20,90 @@ class _myRegisterState extends State<myRegister> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   void createAccount() async {
-    String user = emailController.text.trim();
+    String user = userNameController.text.trim();
     String email = emailController.text.trim();
-    String password = emailController.text.trim();
+    String password = passwordController.text.trim();
     if (user == "" || email == "" || password == "") {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("Register Failure"),
-              content: Text("Please Fill all the Details"),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Ok"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
       log("Please Fill all the Details");
+      errorRegister();
     } else {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
+
+        DocumentReference documentReference =
+            FirebaseFirestore.instance.collection("User").doc(user);
+
+        var todoList = {"user": user, "email": email, "password": password};
+        documentReference
+            .set(todoList)
+            .whenComplete(() => print("Data stored successfully"));
         log("User Created");
-      } on FirebaseAuth catch (e) {
-        print(e);
+        jumptoLogin();
+      } on FirebaseAuthException catch (e) {
+        print("arun");
+        print(e.code);
+        if (e.code != "") {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Error"),
+                  content: Text(e.code),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Ok"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              });
+        } else {
+          jumptoLogin();
+        }
       }
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("User Sucessfully Created"),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Ok"),
-                  onPressed: () {
-                    //Navigator.pushNamed(context, 'login');
-                    Navigator.push(context,
-                        CupertinoPageRoute(builder: (context) => myLogin()));
-                  },
-                )
-              ],
-            );
-          });
     }
+  }
+
+  void errorRegister() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Register Failure"),
+            content: Text("Please Fill all the Details"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  void jumptoLogin() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("User Sucessfully Created"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  //Navigator.pushNamed(context, 'login');
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (context) => myLogin()));
+                },
+              )
+            ],
+          );
+        });
   }
 
   @override

@@ -22,11 +22,20 @@ class _myLoginState extends State<myLogin> {
 
   void Loginfunction() async {
     String myemail = emailController.text.trim();
-    String mypassword = emailController.text.trim();
+    String mypassword = passwordController.text.trim();
 
     if (myemail == "" ||
         myemail == null && mypassword == "" ||
         mypassword == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.orangeAccent,
+          content: Text(
+            "Please Fill All the Field",
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
+          ),
+        ),
+      );
       log("Please Fill All the Field");
       //This is for Alert box
       showDialog(
@@ -51,35 +60,25 @@ class _myLoginState extends State<myLogin> {
             .signInWithEmailAndPassword(email: myemail, password: mypassword);
         if (userCredential.user != null) {
           print('Log in sucess');
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("Login Sucess"),
-                  // content: Text("Please Fill all the Details"),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text("Ok"),
-                      onPressed: () {
-                        Navigator.popUntil(context, (route) => route.isFirst);
-                        Navigator.pushReplacement(
-                            context,
-                            CupertinoPageRoute(
-                                builder: ((context) => MyHome())));
-                      },
-                    )
-                  ],
-                );
-              });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Login Sucess",
+                style: TextStyle(fontSize: 18.0, color: Colors.black),
+              ),
+            ),
+          );
+          fastLogin();
         }
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
+        if (e.code != "") {
           showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text("Login Failure"),
-                  content: Text("Please Give Your Correct User Details"),
+                  content: Text(e.code),
                   actions: <Widget>[
                     FlatButton(
                       child: Text("Ok"),
@@ -96,6 +95,27 @@ class _myLoginState extends State<myLogin> {
         }
       }
     }
+  }
+
+  void fastLogin() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Login Sucess"),
+            // content: Text("Please Fill all the Details"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                  Navigator.pushReplacement(context,
+                      CupertinoPageRoute(builder: ((context) => MyHome())));
+                },
+              )
+            ],
+          );
+        });
   }
 
   @override
