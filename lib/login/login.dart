@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:oms/dashboard/home.dart';
+import 'package:oms/dashboard/todo_app.dart';
 import 'package:oms/login/register.dart';
 import 'package:oms/login/resetpass.dart';
 
@@ -110,7 +111,7 @@ class _myLoginState extends State<myLogin> {
                 onPressed: () {
                   Navigator.popUntil(context, (route) => route.isFirst);
                   Navigator.pushReplacement(context,
-                      CupertinoPageRoute(builder: ((context) => MyHome())));
+                      CupertinoPageRoute(builder: ((context) => TodoList())));
                 },
               )
             ],

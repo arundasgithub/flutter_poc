@@ -42,6 +42,9 @@ class NavDrawer extends StatelessWidget {
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
               backgroundColor: Color.fromARGB(225, 208, 220, 39),
+              backgroundImage: AssetImage(
+                'assets/profile.jpg',
+              ),
             ),
             accountName: Text(uid),
             accountEmail: Text(email!),
