@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+This one is a ToDo Application.
+You can Register and Login into the application Using Your Email ID And Password.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
