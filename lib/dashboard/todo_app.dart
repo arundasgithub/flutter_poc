@@ -134,7 +134,18 @@ class _TodoListState extends State<TodoListPage> {
               ]),
             ),
             actions: <Widget>[
-              TextButton(
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red, // Background color
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      Navigator.of(context).pop();
+                    });
+                    // Navigator.of(context).pop();
+                  },
+                  child: const Text("Cancel")),
+              ElevatedButton(
                   onPressed: () {
                     setState(() {
                       // todos.add(title);
