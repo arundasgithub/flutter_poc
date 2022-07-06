@@ -269,7 +269,8 @@ class _TodoListState extends State<TodoListPage> {
                             setState(() {
                               _titleController.text =
                                   documentSnapshot!["todoTitle"];
-                              _desController.text = documentSnapshot!["todoDesc"];
+                              _desController.text =
+                                  documentSnapshot!["todoDesc"];
 
                               _editFormDialog(context, snapshot, index);
                             });

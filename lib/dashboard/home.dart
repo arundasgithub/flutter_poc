@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oms/dashboard/side_menu.dart';
-import 'package:oms/dashboard/todo_app.dart';
+//import 'package:oms/dashboard/todo_app.dart';
 
 import 'todo_app2.dart';
 
@@ -10,7 +10,7 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Home',
+      title: 'Home1',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,

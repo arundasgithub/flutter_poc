@@ -201,7 +201,7 @@ class _myRegisterState extends State<myRegister> {
                               style: ElevatedButton.styleFrom(
                                 maximumSize: const Size(170.0, 90.0),
                                 minimumSize: const Size(170.0, 60.0),
-                                primary: Color.fromARGB(247, 235, 150, 65),
+                                primary: Colors.lightBlue,
                                 shape: const StadiumBorder(),
                               ),
                               onPressed: () {

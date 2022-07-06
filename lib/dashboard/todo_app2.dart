@@ -20,7 +20,7 @@ class TodoList2 extends StatelessWidget {
       title: 'Home',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.lightBlue,
       ),
       home: TodoListPage2(),
     );
@@ -289,7 +289,6 @@ class _TodoListState2 extends State<TodoListPage2> {
                                   ? documentSnapshot["todotime"]
                                   : "")
                                   : ""),*/
-
 
                               /*    IconButton(
                                 icon: const Icon(Icons.edit,size: 5,),

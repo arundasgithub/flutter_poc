@@ -3,8 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:oms/dashboard/home.dart';
-import 'package:oms/dashboard/todo_app.dart';
+
 import 'package:oms/dashboard/todo_app2.dart';
 import 'package:oms/login/register.dart';
 import 'package:oms/login/resetpass.dart';
@@ -31,7 +30,7 @@ class _myLoginState extends State<myLogin> {
         mypassword == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Colors.orangeAccent,
+          backgroundColor: Colors.lightBlue,
           content: Text(
             "Please Fill All the Field",
             style: TextStyle(fontSize: 18.0, color: Colors.black),
@@ -64,7 +63,7 @@ class _myLoginState extends State<myLogin> {
           print('Log in sucess');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Colors.orangeAccent,
+              backgroundColor: Colors.lightBlue,
               content: Text(
                 "Login Sucess",
                 style: TextStyle(fontSize: 18.0, color: Colors.black),
@@ -196,7 +195,7 @@ class _myLoginState extends State<myLogin> {
                               style: ElevatedButton.styleFrom(
                                 maximumSize: Size(170.0, 90.0),
                                 minimumSize: Size(170.0, 60.0),
-                                primary: Color.fromARGB(247, 235, 150, 65),
+                                primary: Colors.lightBlue,
                                 shape: StadiumBorder(),
                               ),
                               onPressed: () {

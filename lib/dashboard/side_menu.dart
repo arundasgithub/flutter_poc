@@ -41,14 +41,16 @@ class NavDrawer extends StatelessWidget {
           // ),
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Color.fromARGB(225, 208, 220, 39),
+              backgroundColor: Colors.lightBlue,
               backgroundImage: AssetImage(
                 'assets/profile.jpg',
               ),
             ),
             accountName: Text(email!),
             accountEmail: Text(''),
-            decoration: BoxDecoration(color: Colors.orange),
+            decoration: BoxDecoration(
+              color: Colors.lightBlue,
+            ),
           ),
           // ListTile(
           //   leading: Icon(Icons.input),

@@ -319,7 +319,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     style: ElevatedButton.styleFrom(
                       maximumSize: Size(170.0, 90.0),
                       minimumSize: Size(170.0, 60.0),
-                      primary: Color.fromARGB(247, 235, 150, 65),
+                      primary: Colors.lightBlue,
                       shape: StadiumBorder(),
                     ),
                     onPressed: () {
