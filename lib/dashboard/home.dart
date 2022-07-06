@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oms/dashboard/side_menu.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:oms/dashboard/todo_app.dart';
+
+import 'todo_app2.dart';
 
 void main() => runApp(MyHome());
 
@@ -56,7 +57,7 @@ class MyHomePage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const TodoList()));
+                          builder: (context) => const TodoList2()));
                 },
               )
             ],

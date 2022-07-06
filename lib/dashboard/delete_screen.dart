@@ -6,44 +6,32 @@ import 'package:intl/intl.dart';
 import 'package:oms/dashboard/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() => runApp(TodoList());
+import 'reminder_screen.dart';
 
-class TodoList extends StatelessWidget {
-  const TodoList({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Home',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: TodoListPage(),
-    );
-  }
-}
-
-class TodoListPage extends StatefulWidget {
-  const TodoListPage({Key? key}) : super(key: key);
+class DeleteScreen extends StatefulWidget {
+  const DeleteScreen({Key? key}) : super(key: key);
 
   // final String title;
 
   @override
-  State<TodoListPage> createState() => _TodoListState();
+  State<DeleteScreen> createState() => _DeleteScreenState();
 }
 
-class _TodoListState extends State<TodoListPage> {
+class _DeleteScreenState extends State<DeleteScreen> {
   final List<String> _todoList = <String>[];
 
   String id = "";
   String title = "";
   String description = "";
+  String reminderValue = "";
+  String timeValue = "";
+
   DateTime _dateTime = DateTime.now();
   DateTime now = DateTime.now();
-
+  int _groupValue = -1;
   var _todoDateController = TextEditingController();
-
+  final _todoTimeController = TextEditingController();
+  TimeOfDay time = TimeOfDay.now();
   TextEditingController _titleController = new TextEditingController();
   TextEditingController _desController = new TextEditingController();
   TextEditingController _datetroller = new TextEditingController();
@@ -64,93 +52,21 @@ class _TodoListState extends State<TodoListPage> {
     }
   }
 
-  createTodo() {
-    DateTime now = DateTime.now();
-    var HardId = (now.year.toString() +
-        now.hour.toString() +
-        now.minute.toString() +
-        now.second.toString());
-    DocumentReference documentReference =
-        FirebaseFirestore.instance.collection("MyTodos").doc(HardId);
-    var todoList = {
-      "todoID": HardId,
-      "todoTitle": title,
-      "todoDesc": description,
-      "todoDate": _dateTime,
-    };
-
-    documentReference
-        .set(todoList)
-        .whenComplete(() => print("Data stored successfully"));
-  }
-
-  editTodo(item) {
-    DocumentReference documentReference =
-        FirebaseFirestore.instance.collection("MyTodos").doc(item);
-    var todoList = {
-      "todoTitle": title,
-      "todoDesc": description,
-      "todoDate": _dateTime,
-    };
-    documentReference
-        .update(todoList)
-        .whenComplete(() => print("Data Upadated successfully"));
-  }
-
   delete(item) {
     deleteTodo(item);
   }
 
-  _showFormDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            title: const Text("Add Todo"),
-            content: SizedBox(
-              height: 500,
-              width: 200,
-              child: Column(children: [
-                TextField(
-                  decoration: const InputDecoration(labelText: ('Title')),
-                  onChanged: (String value) {
-                    title = value;
-                  },
-                ),
-                TextField(
-                  decoration: const InputDecoration(labelText: ('Description')),
-                  onChanged: (String value) {
-                    description = value;
-                  },
-                ),
-                TextField(
-                    controller: _todoDateController,
-                    decoration: InputDecoration(
-                      labelText: 'Date',
-                      prefixIcon: InkWell(
-                        onTap: () {
-                          _selectedTodoDate(context);
-                        },
-                        child: const Icon(Icons.calendar_today),
-                      ),
-                    )),
-              ]),
-            ),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      // todos.add(title);
-                      createTodo();
-                    });
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Add"))
-            ],
-          );
-        });
+  _selectedTodoTime(BuildContext context) async {
+    TimeOfDay? newTime = await showTimePicker(
+      context: context,
+      initialTime: time,
+    );
+    if (newTime != null) {
+      setState(() {
+        time = newTime;
+        _todoTimeController.text = newTime.format(context);
+      });
+    }
   }
 
   _editFormDialog(BuildContext context, snapshot, int index) {
@@ -204,11 +120,7 @@ class _TodoListState extends State<TodoListPage> {
             actions: <Widget>[
               TextButton(
                   onPressed: () {
-                    setState(() {
-                      editTodo((documentSnapshot != null)
-                          ? (documentSnapshot["todoID"])
-                          : "");
-                    });
+                    setState(() {});
                     Navigator.of(context).pop();
                   },
                   child: const Text("Update"))
@@ -220,10 +132,7 @@ class _TodoListState extends State<TodoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(),
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
+      appBar: AppBar(title: const Text('Delete ToDo'), actions: <Widget>[]),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("MyTodos").snapshots(),
         builder: (context, snapshot) {
@@ -269,9 +178,11 @@ class _TodoListState extends State<TodoListPage> {
                             setState(() {
                               _titleController.text =
                                   documentSnapshot!["todoTitle"];
-                              _desController.text = documentSnapshot!["todoDesc"];
-
-                              _editFormDialog(context, snapshot, index);
+                              _desController.text =
+                                  documentSnapshot!["todoDesc"];
+                              //  _datetroller.text =documentSnapshot!["todoDate"];
+                              //  _datetroller.text = documentSnapshot!["todoTitle"];
+                              //_editFormDialog(context, snapshot, index);
                             });
                           },
                         ),
@@ -286,48 +197,6 @@ class _TodoListState extends State<TodoListPage> {
             ),
           );
         },
-      ),
-      /*
-      bottomNavigationBar: BottomAppBar(
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     children: <Widget>[
-      //       IconButton(
-      //         icon: const Icon(Icons.home),
-      //         padding: const EdgeInsets.only(left: 30.0),
-      //         iconSize: 40,
-      //         onPressed: () {
-      //           Navigator.push(
-      //               context, MaterialPageRoute(builder: (context) => MyHome()));
-      //         },
-      //       ),
-      //       IconButton(
-      //         icon: const Icon(Icons.search_outlined),
-      //         padding: const EdgeInsets.only(left: 100.0),
-      //         iconSize: 40,
-      //         onPressed: () {},
-      //       ),
-      //       IconButton(
-      //         icon: const Icon(Icons.today_outlined,
-      //             color: Color.fromARGB(247, 235, 150, 65)),
-      //         padding: const EdgeInsets.only(left: 110.0),
-      //         iconSize: 40,
-      //         onPressed: () {
-      //           print("Todo List Page");
-      //         },
-      //       )
-      //     ],
-      //   ),
-      // ),
-      // // add items to the to-do list*/
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showFormDialog(context);
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
       ),
     );
   }

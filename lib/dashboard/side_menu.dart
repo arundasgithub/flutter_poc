@@ -46,8 +46,8 @@ class NavDrawer extends StatelessWidget {
                 'assets/profile.jpg',
               ),
             ),
-            accountName: Text(uid),
-            accountEmail: Text(email!),
+            accountName: Text(email!),
+            accountEmail: Text(''),
             decoration: BoxDecoration(color: Colors.orange),
           ),
           // ListTile(
